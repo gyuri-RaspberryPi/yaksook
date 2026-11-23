@@ -1,0 +1,146 @@
+/* 약속 - 공통 스타일 (휴대폰 먼저) */
+:root {
+  --bg: #f6f4ef;
+  --card: #ffffff;
+  --ink: #1d2433;
+  --muted: #6b7280;
+  --line: #e7e3da;
+  --brand: #2f6f5e;       /* 약속 초록 */
+  --brand-soft: #e3efe9;
+  --ok: #2e7d4f;     --ok-bg: #dff3e6;
+  --warn: #9a6700;   --warn-bg: #fff2c7;
+  --alert: #b3261e;  --alert-bg: #ffdcd8;
+  --info: #2f5fb3;   --info-bg: #e2ebfb;
+  --gray-bg: #eceae4;
+  --radius: 14px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  word-break: keep-all;
+}
+button, input, select { font: inherit; }
+
+/* ---------------------------------------------------------- 상단 메뉴 (보호자 쪽 화면) */
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; gap: 4px;
+  padding: 10px 16px; background: var(--brand); color: #fff;
+}
+.topbar .logo { font-weight: 800; font-size: 18px; margin-right: auto; }
+.topbar a {
+  color: #fff; text-decoration: none; font-size: 14px;
+  padding: 6px 10px; border-radius: 999px; opacity: .85;
+}
+.topbar a.on { background: rgba(255,255,255,.2); opacity: 1; font-weight: 700; }
+.badge {
+  display: inline-block; min-width: 20px; padding: 1px 6px; margin-left: 4px;
+  border-radius: 999px; background: var(--alert); color: #fff; font-size: 12px; text-align: center;
+}
+
+.wrap { max-width: 720px; margin: 0 auto; padding: 16px; }
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 14px;
+}
+.card h2 { font-size: 17px; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+.card h2 .sub { margin-left: auto; font-size: 13px; color: var(--muted); font-weight: 400; }
+.muted { color: var(--muted); font-size: 14px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ---------------------------------------------------------- 상태 표시 */
+.pill {
+  display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 13px; font-weight: 700;
+}
+.st-taken, .lv-ok { background: var(--ok-bg); color: var(--ok); }
+.st-takenNoWater, .lv-notice, .lv-warn { background: var(--warn-bg); color: var(--warn); }
+.st-missed, .lv-urgent, .lv-alert { background: var(--alert-bg); color: var(--alert); }
+.lv-warning { background: #ffe5cc; color: #a24b00; }
+.st-due { background: var(--info-bg); color: var(--info); }
+.st-upcoming, .st-outside { background: var(--gray-bg); color: var(--muted); }
+
+.slot {
+  display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line);
+}
+.slot:first-of-type { border-top: 0; }
+.slot .name { font-weight: 700; width: 48px; }
+.slot .time { color: var(--muted); width: 92px; font-size: 14px; }
+.slot .detail { flex: 1; font-size: 14px; }
+.slot button { margin-left: auto; }
+
+.alert-item { padding: 10px 0; border-top: 1px solid var(--line); display: flex; gap: 10px; align-items: flex-start; }
+.alert-item:first-of-type { border-top: 0; }
+.alert-item.read { opacity: .55; }
+.alert-item .msg { flex: 1; font-size: 15px; line-height: 1.45; }
+.alert-item .when { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+.stat { background: var(--bg); border-radius: 12px; padding: 12px; }
+.stat .num { font-size: 26px; font-weight: 800; }
+.stat .lbl { font-size: 13px; color: var(--muted); }
+
+.bars { display: flex; align-items: flex-end; gap: 3px; height: 90px; }
+.bars .bar { flex: 1; background: var(--brand); border-radius: 3px 3px 0 0; min-height: 2px; opacity: .85; }
+.bars .bar.zero { background: var(--line); }
+.axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+.sensor { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.dot.ok { background: var(--ok); }
+.dot.bad { background: var(--alert); }
+
+/* ---------------------------------------------------------- 버튼과 입력 */
+.btn {
+  border: 0; border-radius: 10px; padding: 9px 14px; cursor: pointer;
+  background: var(--brand); color: #fff; font-weight: 700;
+}
+.btn.ghost { background: var(--brand-soft); color: var(--brand); }
+.btn.small { padding: 5px 10px; font-size: 13px; }
+.btn.danger { background: var(--alert-bg); color: var(--alert); }
+.btn:disabled { opacity: .5; cursor: default; }
+label { display: block; font-size: 14px; color: var(--muted); margin: 10px 0 4px; }
+input[type=text], input[type=number], input[type=date], input[type=time], select {
+  width: 100%; padding: 9px 10px; border: 1px solid var(--line); border-radius: 10px; background: #fff;
+}
+.slot-row { display: grid; grid-template-columns: 1.2fr 1fr .8fr auto; gap: 8px; margin-bottom: 8px; align-items: center; }
+.formmsg { margin-top: 10px; font-size: 14px; min-height: 20px; }
+.formmsg.ok { color: var(--ok); }
+.formmsg.bad { color: var(--alert); }
+.log { font-size: 13px; color: var(--muted); margin-top: 10px; min-height: 18px; }
+details summary { cursor: pointer; font-weight: 700; }
+.step { display: flex; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
+.step:first-of-type { border-top: 0; }
+.step .n { width: 26px; height: 26px; border-radius: 50%; background: var(--brand-soft); color: var(--brand);
+           display: grid; place-items: center; font-weight: 800; flex: none; }
+.step .t { flex: 1; font-size: 14px; }
+.step input { width: 90px; }
+
+/* ---------------------------------------------------------- 스테이션 화면 (어르신용: 아주 크게) */
+body.station {
+  min-height: 100vh; display: flex; flex-direction: column; background: var(--ok-bg);
+  transition: background .4s;
+}
+body.station.warn { background: var(--warn-bg); }
+body.station.alert { background: var(--alert-bg); }
+.st-top { display: flex; justify-content: space-between; align-items: baseline; padding: 3vh 5vw 0; }
+#clock { font-size: clamp(40px, 9vw, 96px); font-weight: 800; letter-spacing: -1px; }
+#today { font-size: clamp(18px, 3vw, 30px); color: var(--muted); }
+#msg {
+  flex: 1; display: flex; align-items: center; justify-content: center; text-align: center;
+  font-size: clamp(32px, 6.5vw, 76px); font-weight: 800; line-height: 1.35; padding: 2vh 6vw;
+}
+.st-slots { display: flex; gap: 2vw; justify-content: center; padding: 0 4vw 4vh; flex-wrap: wrap; }
+.st-slot {
+  background: rgba(255,255,255,.75); border-radius: 18px; padding: 12px 22px; text-align: center; min-width: 140px;
+}
+.st-slot .nm { font-size: clamp(20px, 3vw, 32px); font-weight: 800; }
+.st-slot .tm { font-size: clamp(14px, 2vw, 22px); color: var(--muted); }
+.st-slot .pill { font-size: clamp(14px, 2vw, 22px); margin-top: 6px; }
+#voiceGate {
+  position: fixed; inset: 0; background: rgba(29,36,51,.55); display: grid; place-items: center; z-index: 20;
+}
+#voiceGate button { font-size: 28px; padding: 22px 36px; border-radius: 18px; }
+#voiceGate p { color: #fff; text-align: center; margin-top: 14px; }

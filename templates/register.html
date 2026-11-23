@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>약속 - 처방·설정</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body data-page="register">
+  <nav class="topbar">
+    <span class="logo">💊 약속</span>
+    <a href="/guardian">보호자</a>
+    <a href="/register" class="on">처방·설정</a>
+    <a href="/report">리포트</a>
+    <a href="/">스테이션</a>
+  </nav>
+
+  <main class="wrap">
+    <!-- 처방 등록 (PUT /api/schedule/1) -->
+    <section class="card">
+      <h2>처방 등록 <span class="sub" id="scheduleUpdated"></span></h2>
+      <form id="scheduleForm">
+        <label for="medicine">약 이름</label>
+        <input type="text" id="medicine" maxlength="30" placeholder="예: 혈압약">
+        <div class="grid2">
+          <div>
+            <label for="startDate">복용 시작일</label>
+            <input type="date" id="startDate">
+          </div>
+          <div>
+            <label for="days">처방 일수</label>
+            <input type="number" id="days" min="1" max="180" value="30">
+          </div>
+        </div>
+        <label for="windowMin">복용 허용 시간 (복용 시각 앞뒤 몇 분)</label>
+        <input type="number" id="windowMin" min="15" max="120" value="60">
+
+        <label>복약 시간대 (이름 · 시각 · 1회 알 수)</label>
+        <div id="slotRows"></div>
+        <button type="button" class="btn ghost small" id="addSlot">+ 시간대 추가</button>
+
+        <label><input type="checkbox" id="prnOn"> 필요할 때 먹는 약(진통제 등)도 등록</label>
+        <div id="prnBox" hidden>
+          <div class="grid2">
+            <div><label for="prnName">약 이름</label><input type="text" id="prnName" placeholder="예: 진통제"></div>
+            <div><label for="prnMax">하루 최대 개수</label><input type="number" id="prnMax" min="1" max="20" value="8"></div>
+          </div>
+          <label for="prnInterval">최소 복용 간격 (시간) — 약 포장에 적힌 용법대로</label>
+          <input type="number" id="prnInterval" min="0.5" max="24" step="0.5" value="4">
+        </div>
+
+        <div class="row" style="margin-top:14px"><button class="btn" type="submit">처방 저장</button></div>
+        <div class="formmsg" id="scheduleMsg"></div>
+      </form>
+    </section>
+
+    <!-- 로드셀 보정 (POST /api/calibration) -->
+    <section class="card">
+      <h2>약통 무게 보정 <span class="sub">로드셀 연결 시</span></h2>
+      <div class="step"><span class="n">1</span><span class="t">받침 위를 비워 주세요.</span>
+        <button class="btn small" data-step="tare">영점 잡기</button></div>
+      <div class="step"><span class="n">2</span><span class="t">무게를 아는 물건을 올리고 무게(g)를 입력하세요.</span>
+        <input type="number" id="calGrams" value="100" min="10" max="1000">
+        <button class="btn small" data-step="scale">보정</button></div>
+      <div class="step"><span class="n">3</span><span class="t">물건을 내리고 빈 약통을 올려 주세요.</span>
+        <button class="btn small" data-step="box">빈 약통 무게</button></div>
+      <div class="step"><span class="n">4</span><span class="t">약을 정확히 넣고 개수를 입력하세요.</span>
+        <input type="number" id="calCount" value="10" min="5" max="100">
+        <button class="btn small" data-step="pill">1알 무게 계산</button></div>
+      <div class="formmsg" id="calMsg"></div>
+    </section>
+
+    <!-- 설정 (PUT /api/settings) -->
+    <section class="card">
+      <h2>안내·알림 설정</h2>
+      <form id="settingsForm">
+        <div class="grid2">
+          <div><label for="callName">어르신 호칭</label><input type="text" id="callName" maxlength="10"></div>
+          <div><label for="voiceRate">말하기 속도 (1.0 보통)</label>
+            <input type="number" id="voiceRate" min="0.5" max="1.5" step="0.05"></div>
+          <div><label for="approachWaitSec">다가온 뒤 안내까지 (초)</label>
+            <input type="number" id="approachWaitSec" min="5" max="60"></div>
+          <div><label for="repeatOpenAlert">먹은 뒤 몇 번 더 열면 알림</label>
+            <input type="number" id="repeatOpenAlert" min="1" max="10"></div>
+          <div><label for="missedRemindMin">미복용 다시 안내 (분 뒤)</label>
+            <input type="number" id="missedRemindMin" min="5" max="60"></div>
+          <div><label for="missedGuardianMin">미복용 보호자 알림 (분 뒤)</label>
+            <input type="number" id="missedGuardianMin" min="10" max="120"></div>
+          <div><label for="wakeCheckTime">기상 확인 시각</label><input type="time" id="wakeCheckTime"></div>
+          <div><label for="inactiveHours">무활동 알림 (시간)</label>
+            <input type="number" id="inactiveHours" min="1" max="12"></div>
+        </div>
+        <label><input type="checkbox" id="telegramEnabled"> 텔레그램으로 휴대폰 알림 받기</label>
+        <div class="row" style="margin-top:14px"><button class="btn" type="submit">설정 저장</button></div>
+        <div class="formmsg" id="settingsMsg"></div>
+      </form>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='js/live.js') }}"></script>
+</body>
+</html>

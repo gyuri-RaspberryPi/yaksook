@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>약속 - 보호자</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body data-page="guardian">
+  <nav class="topbar">
+    <span class="logo">💊 약속</span>
+    <a href="/guardian" class="on">보호자<span class="badge" id="unread" hidden>0</span></a>
+    <a href="/register">처방·설정</a>
+    <a href="/report">리포트</a>
+    <a href="/">스테이션</a>
+  </nav>
+
+  <main class="wrap">
+    <section class="card">
+      <h2>오늘의 복약 <span class="sub" id="todaySummary"></span></h2>
+      <div id="todayList" class="muted">불러오는 중…</div>
+    </section>
+
+    <section class="card">
+      <h2>알림 <span class="sub">최근 30개</span></h2>
+      <div id="alertList" class="muted">불러오는 중…</div>
+    </section>
+
+    <div class="grid2">
+      <section class="card">
+        <h2>남은 약</h2>
+        <div id="inventory" class="muted">불러오는 중…</div>
+      </section>
+      <section class="card">
+        <h2>기기 상태</h2>
+        <div id="health" class="muted">불러오는 중…</div>
+      </section>
+    </div>
+
+    <section class="card">
+      <h2>안부 <span class="sub" id="lastSeen"></span></h2>
+      <div class="bars" id="bars"></div>
+      <div class="axis"><span>0시</span><span>6시</span><span>12시</span><span>18시</span><span>23시</span></div>
+    </section>
+
+    <section class="card">
+      <details>
+        <summary>시연용 가짜 센서</summary>
+        <p class="muted">센서 없이 이벤트를 만들어 판정과 알림을 시험합니다. 스테이션 화면에도 그대로 나옵니다.</p>
+        <div class="row">
+          <button class="btn ghost small" data-sim="approach">약통 앞에 옴</button>
+          <button class="btn ghost small" data-sim="open">뚜껑 열림</button>
+          <button class="btn ghost small" data-sim="measured?pills=1">1알 꺼냄</button>
+          <button class="btn ghost small" data-sim="measured?pills=2">2알 꺼냄</button>
+          <button class="btn ghost small" data-sim="measured?pills=4">4알 꺼냄</button>
+          <button class="btn ghost small" data-sim="measured?pills=-10">10알 보충</button>
+          <button class="btn ghost small" data-sim="cup?heldSec=3">물컵 들었다 놓음</button>
+        </div>
+        <div class="log" id="simLog"></div>
+      </details>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='js/live.js') }}"></script>
+</body>
+</html>

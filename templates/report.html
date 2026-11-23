@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>약속 - 주간 리포트</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body data-page="report">
+  <nav class="topbar">
+    <span class="logo">💊 약속</span>
+    <a href="/guardian">보호자</a>
+    <a href="/register">처방·설정</a>
+    <a href="/report" class="on">리포트</a>
+    <a href="/">스테이션</a>
+  </nav>
+
+  <main class="wrap">
+    <section class="card">
+      <h2>주간 복약 리포트 <span class="sub" id="range"></span></h2>
+      <label for="endDate">마지막 날</label>
+      <input type="date" id="endDate">
+      <div class="grid2" style="margin-top:14px">
+        <div class="stat"><div class="num" id="adherence">-</div><div class="lbl">복약률</div></div>
+        <div class="stat"><div class="num" id="delay">-</div><div class="lbl">평균 지연</div></div>
+        <div class="stat"><div class="num" id="dup">-</div><div class="lbl">중복 복용 시도</div></div>
+        <div class="stat"><div class="num" id="over">-</div><div class="lbl">과다 복용 시도</div></div>
+        <div class="stat"><div class="num" id="nowater">-</div><div class="lbl">물 마신 기록 없음</div></div>
+        <div class="stat"><div class="num" id="reopen">-</div><div class="lbl">먹은 뒤 다시 연 횟수</div></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>날짜별 복용</h2>
+      <div id="daily"></div>
+    </section>
+
+    <section class="card">
+      <h2>시간대별 미복용</h2>
+      <div id="missed"></div>
+      <p class="muted">진료 때 이 화면을 의사 선생님께 보여 주세요.</p>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='js/live.js') }}"></script>
+</body>
+</html>

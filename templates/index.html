@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>약속 - 복약 스테이션</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<!-- 어르신이 보는 화면: 약통 옆 태블릿이나 오래된 휴대폰에 켜 둡니다. 누를 것이 없습니다. -->
+<body class="station" data-page="station" data-name="{{ name }}">
+  <div class="st-top">
+    <div id="clock">--:--</div>
+    <div id="today"></div>
+  </div>
+
+  <div id="msg">{{ name }}, 안녕하세요.</div>
+
+  <div class="st-slots" id="slots"></div>
+
+  <!-- 브라우저는 한 번 눌러야 소리를 낼 수 있어서, 설치할 때 보호자가 한 번만 누릅니다 -->
+  <div id="voiceGate">
+    <div>
+      <button class="btn" id="voiceOn">음성 안내 켜기</button>
+      <p>설치할 때 보호자가 한 번만 눌러 주세요.</p>
+    </div>
+  </div>
+
+  <audio id="chime" src="{{ url_for('static', filename='sounds/chime.wav') }}" preload="auto"></audio>
+  <audio id="alarm" src="{{ url_for('static', filename='sounds/alert.wav') }}" preload="auto"></audio>
+  <script src="{{ url_for('static', filename='js/live.js') }}"></script>
+</body>
+</html>

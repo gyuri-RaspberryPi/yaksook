@@ -1,0 +1,9 @@
+# 웹 서버 (노트북·라즈베리파이 공통)
+flask>=2.3
+
+# 아래는 라즈베리파이에서 실제 센서를 쓸 때만 필요합니다 (--hardware)
+# 라즈베리파이에서: pip install -r requirements.txt
+gpiozero; platform_machine == "aarch64" or platform_machine == "armv7l"
+smbus2; platform_machine == "aarch64" or platform_machine == "armv7l"
+RPi.GPIO; platform_machine == "armv7l"
+rpi-lgpio; platform_machine == "aarch64"
